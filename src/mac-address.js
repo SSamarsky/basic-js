@@ -14,9 +14,12 @@ const { NotImplementedError } = require('../lib');
  * For 00-1B-63-84-45-E6, the output should be true.
  *
  */
-function isMAC48Address(/* n */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+function isMAC48Address(n) {
+  let arr = n.split('-');
+  for (const el of arr) {
+    if (el[0].toUpperCase() > 'F' || el[1].toUpperCase() > 'F') return false;
+  }
+  return true;
 }
 
 module.exports = {
