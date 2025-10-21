@@ -23,9 +23,43 @@ const { NotImplementedError } = require('../lib');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+function minesweeper(matrix) {
+  let arr = Array(matrix.length);
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = [];
+    for (let k = 0; k < matrix[0].length; k++) {
+      arr[i][k] = 0;
+    }
+  }
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let k = 0; k < matrix[i].length; k++) {
+      if (matrix[i][k] === true) {
+        if (arr[i][k + 1] !== undefined && matrix[i][k + 1] === false) arr[i][k + 1] += 1;
+        
+        if (arr[i][k - 1] !== undefined && matrix[i][k - 1] === false) arr[i][k - 1] += 1;
+        
+        if (arr[i + 1] !== undefined) {
+          if (matrix[i + 1][k] === false) arr[i + 1][k] += 1;
+          
+          if (matrix[i + 1][k + 1] !== undefined && matrix[i + 1][k + 1] === false) arr[i + 1][k + 1] += 1;
+          
+          if (arr[i + 1][k - 1] !== undefined && matrix[i + 1][k - 1] === false) arr[i + 1][k - 1] += 1;
+        }
+        
+        if (arr[i - 1] !== undefined) {
+            if (matrix[i - 1][k] === false) arr[i - 1][k] += 1;
+            
+            if (arr[i - 1][k + 1] !== undefined && matrix[i - 1][k + 1] === false) arr[i -1][k + 1] += 1;
+            
+            if (arr[i - 1][k - 1] !== undefined && matrix[i - 1][k - 1] === false) arr[i - 1][k - 1] += 1;
+        }
+      
+        arr[i][k] = 1;
+      }
+    }
+  }
+  return arr;
 }
 
 module.exports = {
